@@ -1,4 +1,9 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
 target
 .idea
 venv
-__pycache__
+
+
