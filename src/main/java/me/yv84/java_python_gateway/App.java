@@ -24,6 +24,9 @@ public class App
     public SpringBean helloBean() {
         return (SpringBean) context.getBean("helloBean");
     }
+    public SpringBeanFutureTask helloBeanFutureTask() {
+        return (SpringBeanFutureTask) context.getBean("helloBeanFutureTask");
+    }
 
     public static void main( String[] args )
     {

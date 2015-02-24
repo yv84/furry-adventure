@@ -1,6 +1,6 @@
 import code
 import sys
-
+import threading
 
 from py4j.java_gateway import JavaGateway
 
@@ -48,6 +48,17 @@ def DebugKeyboard(banner="Debugger started (CTRL-D to quit)"):
     code.interact(banner=banner, local=namespace)
     print("END DEBUG")
 
+class HelloBeanFutureTask(threading.Thread):
+    def __init__(self, args, wait_time):
+        super(HelloBeanFutureTask, self).__init__()
+        self.future = None
+        self.args = args
+        self.wait_time = wait_time
+        self.sb = gateway.entry_point.helloBeanFutureTask()
+
+    def run(self):
+        self.future = self.sb.call(self.args, self.wait_time)
+
 
 if __name__ == '__main__':
     print(hello_from_java)
@@ -56,4 +67,13 @@ if __name__ == '__main__':
     print(spring_bean.helloWorld(jvm_list(1,2,3)))
     print(spring_bean.helloWorld(jvm_set(1,1,2,2,3)))
     print(spring_bean.helloWorld(jvm_map({'a':1,'b':2})))
+    thread1 = HelloBeanFutureTask(jvm_list(1,2,3), 1000)
+    thread2 = HelloBeanFutureTask("Hello from python!", 2000)
+    [i.start() for i in [thread1, thread2]]
+    [i.join() for i in [thread1, thread2]]
+    print(thread1.future.get())
+    print(thread2.future.get())
     DebugKeyboard()
+
+
+

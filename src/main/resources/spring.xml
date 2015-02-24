@@ -4,7 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="helloBean" class="me.yv84.java_python_gateway.SpringBean">
+    <bean id="helloBean"
+          class="me.yv84.java_python_gateway.SpringBean">
+    </bean>
+    <bean id="helloBeanFutureTask"
+          class="me.yv84.java_python_gateway.SpringBeanFutureTask"
+          scope="prototype">
     </bean>
 
 </beans>
